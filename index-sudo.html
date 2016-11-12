@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <script src="https://d3js.org/d3.v4.min.js"></script>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no"/>
   <title>Parallax Template - Materialize</title>
@@ -10,6 +11,8 @@
   <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
   <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
 </head>
+    
+
 <body>
   <nav class="white" role="navigation">
     <div class="nav-wrapper container">
@@ -44,10 +47,69 @@
     </div>
     <div class="parallax"><img src="background1.png" alt="Unsplashed background img 1"></div>
   </div>
+<!--This is the visualization -->
+  <script>
+        var svg = d3.select("body")
+            .append("svg")
+            .attr("width", 960)
+            .attr("height", 600);
+    
+        var nodes = [{"id": "point1", "x": 100, "y": 150, "affiliation": "blue"},
+            {"id": "point2", "x": 150, "y": 200, "affiliation": "red"},
+            {"id": "point3", "x": 200, "y": 100, "affiliation": "red"},
+            {"id": "point4", "x": 400, "y": 300, "affiliation": "blue"},
+            {"id": "point5", "x": 250, "y": 300, "affiliation": "green"}];
+    
+        var links = [{"source": "point1", "target": "point2"},
+            {"source": "point2", "target": "point3"},
+            {"source": "point1", "target": "point4"},
+            {"source": "point3", "target": "point4"},
+            {"source": "point3", "target": "point1"},
+            {"source": "point5", "target": "point1"}];
+    
+        var width = svg.attr("width"),
+            height = svg.attr("height");
+        
+        draw(nodes, links);
+        
+        function draw(nodes, links) {
+            var nodeRadius = 10;
+            var nodeById = d3.map(nodes, function(d) {return d.id;});
+            
+            var nodes = svg.append("g")
+                .attr("class", "nodes")
+                .selectAll("circle")
+                .data(nodes)
+                .enter()
+                .append("circle");
 
+            nodes.attr("r", nodeRadius)
+                .attr("cx", function (d) {return d.x;})
+                .attr("cy", function (d) {return d.y;})
+                .style("fill", function (d) {return d.affiliation;})
+                .style("opacity", .5);
 
+            var links = svg.append("g")
+                .attr("class", "links")
+                .selectAll("line")
+                .data(links)
+                .enter()
+                .append("line");
+
+            links.attr("x1", function(d) {return nodeById.get(d.source).x;})
+                .attr("y1", function(d) {return nodeById.get(d.source).y;})
+                .attr("x2", function(d) {return nodeById.get(d.target).x;})
+                .attr("y2", function(d) {return nodeById.get(d.target).y;})
+                .attr("stroke-width", 1)
+                .attr("stroke", "gray")
+                .style("opacity", .5);
+        }
+    
+    </script>
+<!--End of the visualization -->
   <div class="container">
     <div class="section">
+     
 
       <!--   Icon Section   -->
       <div class="row">
