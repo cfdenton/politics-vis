@@ -43,20 +43,27 @@ def same_domain(url1, url2, print_out):
 # search the web page's text to find given phrase matches. assumes a validated url
 def check_page(url, phrases):
     try:
-        article = Article(url)
-        article.config.timeout=1
-        article.download()
-        print(url[0:40])
-        if not article.is_downloaded:
-            raise Exception
-        article.parse()
-        content = article.text
-        for phrase in phrases:
-            if phrase in content:
-                print("found " + phrase + " in url " + url)
-                return True
+        r = requests.get(url, timeout=.1)
+        page_soup = BeautifulSoup(r.text, 'html.parser')
+        content = " ".join( \
+                [x for x in [p.string for p in page_soup.find_all('p')] \
+                if x is not None])
+        if detect(content) != 'en':
+            return False
+
+        for p in page_soup.find_all('p'):
+            for phrase in phrases:
+                if p.string and phrase in p.string:
+                    return True
+        for a in page_soup.find_all('a'):
+            for phrase in phrases:
+                if a.string and phrase in a.string:
+                    return True
+        return False
+
     except Exception:
         return False
+
 
 
 # return a list of pages connected relevant pages branching at most to depth `max_depth`
