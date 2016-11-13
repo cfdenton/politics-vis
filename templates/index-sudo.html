@@ -2,7 +2,8 @@
 <html lang="en">
 <head>
   <script src="https://d3js.org/d3.v4.min.js"></script>
-  
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no"/>
   <title>Parallax Template - Materialize</title>
@@ -60,58 +61,73 @@
 
   <div class="row center">
 <!--          <a href="http://materializecss.com/getting-started.html" id="download-button" class="btn-large waves-effect waves-light blue lighten-1">Get Started</a>-->
-          <a class="keybuttons waves-effect waves-light white btn-large">International</a>
-            <a class="keybuttons waves-effect waves-light white btn-large">Domestic</a> 
-            <a class="keybuttons waves-effect waves-light white btn-large">Economic</a> 
-            <a class="keybuttons waves-effect waves-light white btn-large">Social</a>
-            <a class="keybuttons waves-effect waves-light white btn-large">Education</a> 
-            <a class="keybuttons waves-effect waves-light white btn-large">Immigration</a> 
-            <a class="keybuttons waves-effect waves-light white btn-large">Healthcare</a>
-            <a class="keybuttons waves-effect waves-light white btn-large">Science</a> 
-            <a class="keybuttons waves-effect waves-light white btn-large">Environmental</a> 
+          <a class="keybuttons waves-effect waves-light white btn-large visualize" id="International">International</a>
+          <a class="keybuttons waves-effect waves-light white btn-large visualize" id="Domestic">Domestic</a> 
+          <a class="keybuttons waves-effect waves-light white btn-large visualize" id="Economic">Economic</a> 
+          <a class="keybuttons waves-effect waves-light white btn-large visualize" id="Social">Social</a>
+          <a class="keybuttons waves-effect waves-light white btn-large visualize" id="Education">Education</a> 
+          <a class="keybuttons waves-effect waves-light white btn-large visualize"id="Immigration">Immigration</a>
+          <a class="keybuttons waves-effect waves-light white btn-large visualize"id="Healthcare">Healthcare</a>
+          <a class="keybuttons waves-effect waves-light white btn-large visualize"id="Science">Science</a> 
+          <a class="keybuttons waves-effect waves-light white btn-large visualize"id="Environmental">Environmental</a> 
 <!--            <a class="keybuttons waves-effect waves-light white btn-large">Criminal</a> -->
         </div>
      
   <div class="container">
     <h2> D3 Graphic</h2>
 <!--    <svg width="600" height="400" style="background:#93A1A1"></svg>-->
-    <div id="chart"></div>
+   <!--  <div id="chart"></div> -->
   </div>  
     
-    
-
-    
-<!--This is the visualization -->
-<!--
   <script>
+  // if a button is clicked, then display data on console log
+    
+    $('.visualize').click(function (item) {
+      var text = item.id;
+      $.getJSON("/api/v1/search?q="+text, function (data) {
+        console.log(data);
+        draw(data.nodes, data.links, text);
+      });
+    });  
+
         var svg = d3.select("body")
             .append("svg")
             .attr("width", 960)
             .attr("height", 600);
     
-        var nodes = [{"id": "point1", "x": 100, "y": 150, "affiliation": "blue"},
-            {"id": "point2", "x": 150, "y": 200, "affiliation": "red"},
-            {"id": "point3", "x": 200, "y": 100, "affiliation": "red"},
-            {"id": "point4", "x": 400, "y": 300, "affiliation": "red"},
-            {"id": "point5", "x": 250, "y": 300, "affiliation": "red"}];
+        //var nodes = node_inputs;
+        // [{"id": "point1", "x": 100, "y": 150, "affiliation": "blue"},
+        //     {"id": "point2", "x": 150, "y": 200, "affiliation": "red"},
+        //     {"id": "point3", "x": 200, "y": 100, "affiliation": "red"},
+        //     {"id": "point4", "x": 400, "y": 300, "affiliation": "red"},
+        //     {"id": "point5", "x": 250, "y": 300, "affiliation": "red"}];
     
-        var links = [{"source": "point1", "target": "point2"},
-            {"source": "point2", "target": "point3"},
-            {"source": "point1", "target": "point4"},
-            {"source": "point3", "target": "point4"},
-            {"source": "point3", "target": "point1"},
-            {"source": "point5", "target": "point1"}];
+        //var links = link_inputs;
+        // [{"source": "point1", "target": "point2"},
+        //     {"source": "point2", "target": "point3"},
+        //     {"source": "point1", "target": "point4"},
+        //     {"source": "point3", "target": "point4"},
+        //     {"source": "point3", "target": "point1"},
+        //     {"source": "point5", "target": "point1"}];
     
         var width = svg.attr("width"),
             height = svg.attr("height");
         
-        draw(nodes, links);
+        // draw(nodes, links);
         
-        function draw(nodes, links) {
+        function draw(nodes, links, graph_id) {
             var nodeRadius = 10;
             var nodeById = d3.map(nodes, function(d) {return d.id;});
             
-            var nodes = svg.append("g")
+            d3.selectAll('.graph')
+                .style("opacity", 0);
+
+            var graph = svg.append("g")
+                .attr("id", "graph-" + graph_id)
+                .attr("class", "graph")
+                .style("opacity", 1);
+
+            var nodes = graph.append("g")
                 .attr("class", "nodes")
                 .selectAll("circle")
                 .data(nodes)
@@ -124,7 +140,7 @@
                 .style("fill", function (d) {return d.affiliation;})
                 .style("opacity", .5);
 
-            var links = svg.append("g")
+            var links = graph.append("g")
                 .attr("class", "links")
                 .selectAll("line")
                 .data(links)
@@ -139,10 +155,8 @@
                 .attr("stroke", "gray")
                 .style("opacity", .5);
         }
-    
     </script>
--->
-<!--End of the visualization -->
+
   <div class="container">
     <div class="section">
      
@@ -189,7 +203,7 @@
         </div>
       </div>
     </div>
-    <div class="parallax"><img src="background2.jpg" alt="Unsplashed background img 2"></div>
+    <div class="parallax"><img src="/static/styles/background2.jpg" alt="Unsplashed background img 2"></div>
   </div>
 
   <div class="container">
@@ -215,7 +229,7 @@
         </div>
       </div>
     </div>
-    <div class="parallax"><img src="background3.jpg" alt="Unsplashed background img 3"></div>
+    <div class="parallax"><img src="/static/styles/background3.jpg" alt="Unsplashed background img 3"></div>
   </div>
 
   <footer class="page-footer teal">
@@ -259,7 +273,7 @@
   <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
   <script src="/static/styles/js/materialize.js"></script>
   <script src="/static/styles/js/init.js"></script>
-  <script src="/static/styles/js/script.js"></script>
+  <!--script src="/static/styles/js/script.js"></script-->
   </body>
   
 </html>
