@@ -2,25 +2,35 @@
 <html lang="en">
 <head>
   <script src="https://d3js.org/d3.v4.min.js"></script>
+  
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no"/>
   <title>Parallax Template - Materialize</title>
-
   <!-- CSS  -->
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Merriweather" rel="stylesheet">
   <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
   <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+<!--  <link rel="stylesheet" href="_/base.css">-->
 </head>
     
 
 <body>
   <nav class="white" role="navigation">
+      
+<!--
+    <ul id="slide-out" class="side-nav fixed">
+      <li><a href="#!">First Sidebar Link</a></li>
+      <li><a href="#!">Second Sidebar Link</a></li>
+    </ul>
+    <a href="#" data-activates="slide-out" class="button-collapse"><i class="material-icons">menu</i></a>
+-->
     <div class="nav-wrapper container">
-     <a id="logo-container" href="#" class="brand-logo" >ISSUES AT HAND</a> 
+     <a id="logo-container" href="#" class="brand-logo blue-text"><strong> ISSUES </strong> <span class="title"><em> at </em> </span><strong><span class="red-text">HAND</span></strong></a>  
       <ul class="right hide-on-med-and-down">
-        <li><a href="#">INTERNATIONAL</a></li>
-        <li><a href="#">DOMESTIC</a></li>
-        <li><a href="#">SOCIAL</a></li>
+        <li><a href="#">PURPOSE</a></li>
+        <li><a href="#">METHODOLOGY</a></li>
+        <li><a href="#">ABOUT</a></li>
       </ul>
 
       <ul id="nav-mobile" class="side-nav">
@@ -36,18 +46,43 @@
         <br><br>
         <h1 class="header center text-lighten-2">Left Side, Right Side</h1>
         <div class="row center">
-          <h5 class="header col s12 light">A modern visualization side-by-side network based on Published Media</h5>
+          <h5 class="header1 col s12 light">A networked visualization of Issues categorized by Published Media</h5>
+       
         </div>
-        <div class="row center">
-<!--          <a href="http://materializecss.com/getting-started.html" id="download-button" class="btn-large waves-effect waves-light teal lighten-1">Get Started</a>-->
-        </div>
-        <br><br>
-
+        <div class="row center"></div>
+        
       </div>
     </div>
-    <div class="parallax"><img src="background1.png" alt="Unsplashed background img 1"></div>
+    <div class="parallax"><img src="20161112-background1-2.jpg" alt="Unsplashed background img 1"></div>
   </div>
+  <br><br>
+    
+
+  <div class="row center">
+<!--          <a href="http://materializecss.com/getting-started.html" id="download-button" class="btn-large waves-effect waves-light blue lighten-1">Get Started</a>-->
+          <a class="keybuttons waves-effect waves-light white btn-large">International</a>
+            <a class="keybuttons waves-effect waves-light white btn-large">Domestic</a> 
+            <a class="keybuttons waves-effect waves-light white btn-large">Economic</a> 
+            <a class="keybuttons waves-effect waves-light white btn-large">Social</a>
+            <a class="keybuttons waves-effect waves-light white btn-large">Education</a> 
+            <a class="keybuttons waves-effect waves-light white btn-large">Immigration</a> 
+            <a class="keybuttons waves-effect waves-light white btn-large">Healthcare</a>
+            <a class="keybuttons waves-effect waves-light white btn-large">Science</a> 
+            <a class="keybuttons waves-effect waves-light white btn-large">Environmental</a> 
+<!--            <a class="keybuttons waves-effect waves-light white btn-large">Criminal</a> -->
+        </div>
+     
+  <div class="container">
+    <h2> D3 Graphic</h2>
+<!--    <svg width="600" height="400" style="background:#93A1A1"></svg>-->
+    <div id="chart"></div>
+  </div>  
+    
+    
+
+    
 <!--This is the visualization -->
+<!--
   <script>
         var svg = d3.select("body")
             .append("svg")
@@ -57,8 +92,8 @@
         var nodes = [{"id": "point1", "x": 100, "y": 150, "affiliation": "blue"},
             {"id": "point2", "x": 150, "y": 200, "affiliation": "red"},
             {"id": "point3", "x": 200, "y": 100, "affiliation": "red"},
-            {"id": "point4", "x": 400, "y": 300, "affiliation": "blue"},
-            {"id": "point5", "x": 250, "y": 300, "affiliation": "green"}];
+            {"id": "point4", "x": 400, "y": 300, "affiliation": "red"},
+            {"id": "point5", "x": 250, "y": 300, "affiliation": "red"}];
     
         var links = [{"source": "point1", "target": "point2"},
             {"source": "point2", "target": "point3"},
@@ -106,6 +141,7 @@
         }
     
     </script>
+-->
 <!--End of the visualization -->
   <div class="container">
     <div class="section">
@@ -223,6 +259,7 @@
   <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
   <script src="js/materialize.js"></script>
   <script src="js/init.js"></script>
-
+  <script src="script.js"></script>
   </body>
+  
 </html>

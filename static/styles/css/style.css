@@ -10,8 +10,51 @@ html {
     font-family: anonymous_pro, Calibri, Trebuchet, sans-serif;
   }
 
+header, main, footer {
+      padding-left: 300px;
+    }
 
-        
+    @media only screen and (max-width : 992px) {
+      header, main, footer {
+        padding-left: 0;
+      }
+    }
+
+.title{
+    font-family: 'Merriweather', serif;
+    font-size: 12px;
+    
+}
+strong{
+    font-weight: bold;
+}
+.header{
+    font-family: 'Merriweather', serif;
+}        
+
+.keybuttons{
+    margin-right: 10px;
+    margin-bottom: 10px;
+    color: dodgerblue;
+    text-transform: lowercase;
+    font-weight: lighter;
+    -moz-border-radius: 30px 30px 30px 0;
+    
+}
+
+.keybuttons:hover{
+    background-color: dodgerblue!important;
+    color: white;
+}
+
+.tab:hover{
+    color: white;
+}
+
+.keybuttons:active{
+    background-color: white !important;
+    color: dodgerblue !important;
+}
 
 nav ul a,
 nav .brand-logo {
@@ -29,7 +72,7 @@ p {
 }
 
 .parallax-container {
-  min-height: 380px;
+  min-height: 200px;
   line-height: 0;
   height: auto;
   color: rgba(255,255,255,.9);
