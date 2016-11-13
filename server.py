@@ -1,7 +1,11 @@
+import scrape
 from flask import Flask, jsonify, request, render_template
 app = Flask(__name__)
 
 def the_function(param):
+    return scrape.populate('https://www.theguardian.com/commentisfree/2016/nov/10/after-donald-trump-win-americans-organizing-us-politics', param, 3)
+
+"""	
 	return {
 		"nodes" : [{"id": "point1", "x": 100, "y": 150, "affiliation": "blue"},
             {"id": "point2", "x": 150, "y": 200, "affiliation": "red"},
@@ -15,6 +19,7 @@ def the_function(param):
             {"source": "point3", "target": "point1"},
             {"source": "point5", "target": "point1"}]
 	}
+"""
 
 @app.route("/")
 def home():

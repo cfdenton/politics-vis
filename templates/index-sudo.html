@@ -74,7 +74,7 @@
         </div>
      
   <div class="container">
-    <h2> D3 Graphic</h2>
+    <!-- <h2> D3 Graphic</h2> -->
 <!--    <svg width="600" height="400" style="background:#93A1A1"></svg>-->
    <!--  <div id="chart"></div> -->
   </div>  
@@ -84,6 +84,7 @@
     
     $('.visualize').click(function (item) {
       var text = item.id;
+      console.log(text)
       $.getJSON("/api/v1/search?q="+text, function (data) {
         console.log(data);
         draw(data.nodes, data.links, text);
@@ -151,8 +152,8 @@
                 .attr("y1", function(d) {return nodeById.get(d.source).y;})
                 .attr("x2", function(d) {return nodeById.get(d.target).x;})
                 .attr("y2", function(d) {return nodeById.get(d.target).y;})
-                .attr("stroke-width", 1)
-                .attr("stroke", "gray")
+                .style("stroke-width", 1)
+                .style("stroke", "gray")
                 .style("opacity", .5);
         }
     </script>
