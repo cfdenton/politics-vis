@@ -55,28 +55,6 @@ def check_page(url, phrases):
             if phrase in content:
                 print("found " + phrase + " in url " + url)
                 return True
-    #try:
-    #    r = requests.get(url, timeout=.1)
-    #    page_soup = BeautifulSoup(r.text, 'html.parser')
-    #    content = " ".join( \
-    #            [x for x in [p.string for p in page_soup.find_all('p')] \
-    #            if x is not None])
-    #    if detect(content) != 'en':
-    #        return False
-
-    #    for p in page_soup.find_all('p'):
-    #        for phrase in phrases:
-    #            if p.string and phrase in p.string:
-    #                return True
-    #    for a in page_soup.find_all('a'):
-    #        for phrase in phrases:
-    #            if a.string and phrase in a.string:
-    #                return True
-    #    return False
-
-    #except Exception:
-    #    return False
-
     except Exception:
         return False
 
@@ -84,9 +62,12 @@ def check_page(url, phrases):
 # return a list of pages connected relevant pages branching at most to depth `max_depth`
 def branch_from_source(source_url, phrases, max_depth):
     assert(max_depth > 0)
+    try:
+        r = requests.get(source_url, timeout=1)
+        page_soup = BeautifulSoup(r.text, 'html.parser')
+    except Exception:
+        return [] 
 
-    r = requests.get(source_url)
-    page_soup = BeautifulSoup(r.text, 'html.parser')
     page_summaries = []
 
     for ref_tag in page_soup.find_all('a', href=True):
