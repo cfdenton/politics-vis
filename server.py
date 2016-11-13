@@ -3,7 +3,7 @@ from flask import Flask, jsonify, request, render_template
 app = Flask(__name__)
 
 def the_function(param):
-    return scrape.populate('https://www.theguardian.com/commentisfree/2016/nov/10/after-donald-trump-win-americans-organizing-us-politics', param, 3)
+    return scrape.populate('https://www.nytimes.com/2016/11/13/business/economy/can-trump-save-their-jobs-theyre-counting-on-it.html', param, 2)
 
 """	
 	return {
@@ -23,7 +23,7 @@ def the_function(param):
 
 @app.route("/")
 def home():
-    return render_template("index-sudo.html")
+    return render_template("index.html")
 
 @app.route("/api/v1/search")
 def search():

@@ -108,6 +108,8 @@ def populate(source_url, phrases, max_depth):
     nodes = []
     links = []
 
+    # text_file = open("output.txt", "w")
+
     for i in range(len(page_list)):
         one_node = {"id": page_list[i]['url'], 
                     "x": random.randint(50, 900), 
@@ -132,6 +134,9 @@ def populate(source_url, phrases, max_depth):
             nodes.append(one_node)
             if two_node:
                 nodes.append(two_node)
+
+    # text_file.write("nodes": "%s", "links": "%s")
+    # text_file.close()
 
     return {"nodes": nodes, "links": links}
 
